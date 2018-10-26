@@ -2,22 +2,9 @@
   "name": "redez-server",
   "version": "1.0.0",
   "description": "The backend component of redez",
-  "main": "index.js",
-<<<<<<< HEAD
-  "dependencies": {
-    "apollo-server": "^2.1.0",
-    "graphql": "^14.0.2",
-    "react-redux": "^5.1.0",
-    "redux": "^4.0.1",
-    "redux-devtools": "^3.4.1"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "start": "node index.js",
-=======
+  "main": "src/index.js",
   "scripts": {
     "start": "webpack",
->>>>>>> lane/apollo-setup
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,9 +17,6 @@
   "bugs": {
     "url": "https://github.com/coshx/redez-server/issues"
   },
-<<<<<<< HEAD
-  "homepage": "https://github.com/coshx/redez-server#readme"
-=======
   "homepage": "https://github.com/coshx/redez-server#readme",
   "dependencies": {
     "@babel/core": "^7.1.2",
@@ -48,5 +32,4 @@
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {}
->>>>>>> lane/apollo-setup
 }
