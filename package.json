@@ -4,6 +4,7 @@
   "description": "The backend component of redez",
   "main": "index.js",
   "scripts": {
+    "start": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +19,17 @@
   },
   "homepage": "https://github.com/coshx/redez-server#readme",
   "dependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/env": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
     "apollo-server": "^2.1.0",
-    "graphql": "^14.0.2"
-  }
+    "babel-loader": "^8.0.4",
+    "dotenv": "^6.1.0",
+    "graphql": "^14.0.2",
+    "start-server-webpack-plugin": "^2.2.5",
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "devDependencies": {}
 }
