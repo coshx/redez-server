@@ -1,0 +1,24 @@
+{
+  "name": "redez-server",
+  "version": "1.0.0",
+  "description": "The backend component of redez",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coshx/redez-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coshx/redez-server/issues"
+  },
+  "homepage": "https://github.com/coshx/redez-server#readme",
+  "dependencies": {
+    "apollo-server": "^2.1.0",
+    "graphql": "^14.0.2"
+  }
+}
