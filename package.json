@@ -5,7 +5,10 @@
   "main": "index.js",
   "dependencies": {
     "apollo-server": "^2.1.0",
-    "graphql": "^14.0.2"
+    "graphql": "^14.0.2",
+    "react-redux": "^5.1.0",
+    "redux": "^4.0.1",
+    "redux-devtools": "^3.4.1"
   },
   "devDependencies": {},
   "scripts": {
