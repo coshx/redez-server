@@ -12,17 +12,17 @@ function startServer() {
 
 let server = startServer();
 
-server.listen().then(({ url }) => {
+server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
 });
 
 if(module.hot) {
   module.hot.accept('./graphql', async () => {
-    console.log("Stopping server");
+    console.log("Stopping...");
     await server.stop();
     server = startServer();
-    console.log("Restarting");
-    server.listen().then(({ url }) => {
+    console.log("Restarting...");
+    server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
       console.log(`🚀  Server ready at ${url}`);
     });
   });
