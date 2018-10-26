@@ -6,6 +6,7 @@ function startServer() {
   return new ApolloServer({
     typeDefs: graphqlSchema.typeDefs,
     resolvers: { ...graphqlSchema.resolvers },
+    introspection: true,
   });
 }
 
