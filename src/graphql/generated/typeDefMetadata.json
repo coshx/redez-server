@@ -1,0 +1,47 @@
+{
+  "generatedTypes": {
+    "0": {
+      "name": "Book",
+      "fields": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "Int!"
+        },
+        {
+          "id": 1,
+          "name": "title",
+          "type": "String"
+        },
+        {
+          "id": 2,
+          "name": "author",
+          "type": "String"
+        },
+        {
+          "id": 3,
+          "name": "category",
+          "type": "String"
+        }
+      ]
+    }
+  },
+  "GQLTypesString": "type Book {\n    id: Int!\n    title: String\n    author: String\n    category: String\n}",
+  "GQLQueryString": "extend type Query {\n    books: [Book]\n}",
+  "mockData": {
+    "books": [
+      {
+        "id": 0,
+        "title": "Harry Potter and the Chamber of Secrets",
+        "author": "J.K. Rowling",
+        "category": "Fiction"
+      },
+      {
+        "id": 1,
+        "title": "Jurassic Park",
+        "author": "Michael Crichton",
+        "category": "Fiction"
+      }
+    ]
+  }
+}

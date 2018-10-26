@@ -1,12 +1,11 @@
 import { ApolloServer } from 'apollo-server';
 
 function startServer() {
-  const graphqlSchema = require('./graphql');
-  console.log(graphqlSchema);
+  const gql = require('./graphql');
+  console.log(gql.generateTypesString())
+  const graphqlSchema = gql.makeSchema();
   return new ApolloServer({
-    typeDefs: graphqlSchema.typeDefs,
-    resolvers: { ...graphqlSchema.resolvers },
-    introspection: true,
+    schema: graphqlSchema
   });
 }
 

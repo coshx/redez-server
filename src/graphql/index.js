@@ -1,54 +1,73 @@
 import { gql } from 'apollo-server';
-
-// This is a (sample) collection of books we'll be able to query
-// the GraphQL server for.  A more complete example might fetch
-// from an existing data source like a REST API or database.
-const books = [
-  {
-    id: 0,
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
-    category: 'Fiction',
-    testField: 50,
-  },
-  {
-    id: 1,
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-    category: 'Fiction',
-    testField: 65,
-  },
-];
+import { makeExecutableSchema } from 'graphql-tools';
+import { find } from 'lodash';
+import generatedTypeDefs from './generated/typeDefs';
+import generatedResolvers from './generated/resolvers';
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
-export const typeDefs = gql`
-  # Comments in GraphQL are defined with the hash (#) symbol.
-
-  # This "Book" type can be used in other type declarations.
-  type Book {
+const coreTypeDefs = gql`
+  type GQLType {
     id: Int!
-    title: String
-    author: String
-    category: String
-    testField: Int
+    name: String
+    fields: [GQLField]
   }
 
-  # The "Query" type is the root of all GraphQL queries.
-  # (A "Mutation" type will be covered later on.)
+  type GQLField {
+    id: Int!
+    name: String
+    type: String
+  }
+
   type Query {
-    books: [Book]
-    book: Book
+    gqlTypes: [GQLType]
   }
 `;
 
-// Resolvers define the technique for fetching the types in the
-// schema.  We'll retrieve books from the "books" array above.
-export const resolvers = {
+const coreResolvers = {
   Query: {
-    books: () => books,
-    book: (root, args, context, info) => {
-      return find(books, { id: args.id })
-    },
+    gqlTypes: getGQLTypes,
   },
+
+  GQLType: {
+    fields: getGQLTypeFields
+  }
 };
+
+const typeDefMetadata = require('./generated/typeDefMetadata.json');
+const { generatedTypes } = typeDefMetadata;
+
+function getGQLTypes() {
+  const typeIds = Object.keys(generatedTypes);
+  return typeIds.map(id => generatedTypes[id]);
+}
+
+function getGQLTypeFields(gqlType) {
+  return generatedTypes[gqlType.id].fields;
+}
+
+const makeSchema = () => {
+  return makeExecutableSchema({
+    typeDefs: [coreTypeDefs, ...generatedTypeDefs],
+    resolvers: [coreResolvers, generatedResolvers],
+  });
+}
+
+const generateTypesString = () => {
+  return Object.keys(generatedTypes).reduce((acc, id) => {
+    const type = generatedTypes[id];
+
+    const fields = type.fields.reduce((acc, field) => {
+      return acc += `    ${field.name}: ${field.type}\n`;
+    }, '');
+
+    const query = `type ${type.name} {\n` + fields + '}\n\n';
+
+    return acc += query;
+  }, '');
+}
+
+export {
+  makeSchema,
+  generateTypesString,
+}
