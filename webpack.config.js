@@ -6,7 +6,7 @@ const StartServerPlugin = require('start-server-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: ['webpack/hot/poll?1000', './src/index'],
-  watch: true,
+  watch: false,
   target: 'node',
   stats: 'minimal',
   externals: [
