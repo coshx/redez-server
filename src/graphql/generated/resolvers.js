@@ -2,7 +2,9 @@ import { getMockData } from '../mockHelper';
 
 const generatedResolvers = {
   Query: {
-    books: () => getMockData('books')
+    Books: () => getMockData('Books'),
+Authors: () => getMockData('Authors'),
+
   }
 };
 

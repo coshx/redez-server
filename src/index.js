@@ -1,10 +1,10 @@
 import { ApolloServer } from 'apollo-server';
+import { makeSchema } from './graphql/index';
 
 function startServer() {
-  const gql = require('./graphql');
-  const graphqlSchema = gql.makeSchema();
+  const schema = makeSchema();
   return new ApolloServer({
-    schema: graphqlSchema
+    schema
   });
 }
 
@@ -18,8 +18,10 @@ server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
 export async function restartServer() {
   console.log("Stopping...");
   await server.stop();
+
   console.log("Restarting")
   server = startServer();
+
   console.log("Listening...");
   server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);
